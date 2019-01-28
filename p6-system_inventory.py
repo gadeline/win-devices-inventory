@@ -4,6 +4,8 @@ from datetime import datetime
 import math
 import wmi
 import os
+import ipaddress
+
 
 
 
@@ -26,6 +28,27 @@ if os.path.exists("c:/temp/export.txt"):
 
 # Creation and opening of output file on mode append
 file = open("c:/temp/export.txt","a+")
+
+import ipaddress
+
+# Create IP address range
+net4 = ipaddress.ip_network('192.168.1.0/24')
+
+# Browse all IP address on current scope
+for x in net4.hosts():
+
+### TEST
+import ipaddress
+
+import wmi
+connection = wmi.connect_server(server="PC-A2L", user="PC-A2L\Guillaume", password="guiguiz?")
+c = wmi.WMI(wmi=connection)
+
+for os in c.Win32_OperatingSystem():
+   print (os.Caption)
+
+###
+
 
 
 #file.write("Hostname" + "," + "OS" + "," + "Installation Date" + "," + "Last reboot" + "," + "Architecture" + "," + "Domaine/Workgroup" + "," + "Manufacturer" + "," + "Model" + "," + "TotalPhysicalMemory" + "," + "Serial" + "," + "Processor" + "," + "MaxClockspeed (Ghz)" + "," + "NumberOfCores" + "," + "NumberOfLogicalProcessors" + "," + "DiskName" + "," + "volsize" + "," + "volfreespace" + "\n")
