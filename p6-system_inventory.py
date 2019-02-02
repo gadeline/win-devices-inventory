@@ -24,11 +24,11 @@ def convert_size(size_bytes):
 
 
 # Delete output text file if existing
-if os.path.exists("c:/temp/export.txt"):
-   os.remove("c:/temp/export.txt")
+if os.path.exists("c:/temp/export_servers_inventory.txt"):
+   os.remove("c:/temp/export_servers_inventory.txt")
 
 # Creation and opening of output file in mode append
-file = open("c:/temp/export.txt","a+")
+file = open("c:/temp/export_servers_inventory.txt","a+")
 
 # Creation first line into the file to create all field
 file.write("Date/Time;Hostname;OS;Installation Date;Last reboot;Architecture;Domaine/Workgroup;Manufacturer;Model;Serial;TotalPhysicalMemory;ProcessorType;MaxClockspeed (Mhz);NumberOfCores;NumberOfLogicalProcessors;DiskName;TotalVolSize;TotalVolfreespace;InstalledSoftwares" + "\n")
@@ -82,7 +82,7 @@ try:
          volfreespace = convert_size(int(diskfreeSpace))
          file.write(diskdeviceid + ";" + volsize + ";" + volfreespace + ";")
 
-         # Retrieve some system inventoy informations on servers via WMI (installed softwares on server)
+         # Retrieve some system inventory informations on servers via WMI (installed softwares on server)
          for soft in wmiObject.Win32_Product():
             text = soft.caption + ", " + soft.vendor + ", " + soft.version
             file.write(text + " --- ")
@@ -95,6 +95,3 @@ except Exception:
 
 
 
-
-
-file.close()
